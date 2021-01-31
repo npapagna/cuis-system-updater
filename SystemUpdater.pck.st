@@ -1,6 +1,6 @@
-'From Cuis 5.0 [latest update: #4526] on 23 January 2021 at 10:17:06 pm'!
+'From Cuis 5.0 [latest update: #4402] on 31 January 2021 at 2:09:42 pm'!
 'Description '!
-!provides: 'SystemUpdater' 1 5!
+!provides: 'SystemUpdater' 1 6!
 !requires: 'WebClient' 1 20 nil!
 !requires: 'JSON' 1 19 nil!
 SystemOrganization addCategory: 'SystemUpdater'!
@@ -136,10 +136,11 @@ checkForUpdates
 
 	^ (sourceUpdatesDirectory filesMatches: [ :updateFile | (updateFile isInstalled: systemVersionToUpdate) not ])! !
 
-!SUSystemUpdater methodsFor: 'system update' stamp: 'NPM 1/23/2021 02:52:43'!
+!SUSystemUpdater methodsFor: 'system update' stamp: 'NPM 1/31/2021 14:08:54'!
 installNewUpdates
 
-	cancelUpdate ifFalse: [ ChangeSet installNewUpdates ]! !
+	cancelUpdate ifFalse: [	
+		UISupervisor whenUIinSafeState: [ ChangeSet installNewUpdates ] ]! !
 
 !SUSystemUpdater methodsFor: 'system update' stamp: 'NPM 1/23/2021 21:55:59'!
 saveNewUpdates
